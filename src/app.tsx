@@ -1,3 +1,9 @@
+import { Navbar } from "./components/navbar";
+
 export function App() {
-  return "Setup project";
+  return (
+    <div className="bg-zinc-950">
+      <Navbar />
+    </div>
+  );
 }
