@@ -1,7 +1,8 @@
 import { Button } from "@/components/button";
 import { useTimer } from "@/context/timer-context";
-import { Pause, Play, Sparkle } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { CustomTimer } from "./custom-timer";
 
 export function Controls() {
   const intervalRef = useRef(0);
@@ -43,10 +44,7 @@ export function Controls() {
         )}
         {isTimerActive ? "Pausar" : "Iniciar"}
       </Button>
-      <Button variant="secondary">
-        <Sparkle className="fill-zinc-50 text-transparent" size={16} />
-        Personalizado
-      </Button>
+      <CustomTimer />
     </div>
   );
 }
