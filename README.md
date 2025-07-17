@@ -1,9 +1,12 @@
-# ⏰ Focus Timer
-
-<img src="./src/assets/images/layout.jpeg" style="border-radius: 10px; margin-bottom: 30px;"/>
+# Focus Timer
 
 Um timer com interface limpa e minimalista. Possui presets para ciclos de foco e descanso, além de opção de tempo personalizado.
 
+## Layout
+
+Você pode encontrar o design da interface do usuário do projeto aqui: [Acessar design.](https://www.figma.com/design/g78BdbnZ4sdZDNxJm1NiH6/Focus-Timer---UI?node-id=0-1&t=eETYWpJoCY9J71ls-1)
+
+<img src="./src/assets/images/layout.png"/>
 
 ## Recursos
 
@@ -13,4 +16,4 @@ Possui alguns Presets para definir um tempo de forma rápida (Pomodoro, Pausa cu
 
 Este projeto foi feito como experimento pessoal de UI e controle de tempo. Sinta-se à vontade para clonar, modificar ou contribuir.
 
-Para acessar o timer e utilizar, basta clicar no link em [🚀 Acessar projeto.](https://github.com/RyanGabr/focus-timer)
+Para acessar o timer e utilizar, basta clicar no link em [Acessar projeto.](https://focustimerapp.vercel.app/)
