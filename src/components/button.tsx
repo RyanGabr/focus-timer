@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
-// !IMPORTANT: Icon size to use => 15
+// !IMPORTANT: Icon size to use => 16
 
 const buttonVariants = cva(
   "rounded-full font-semibold px-[14px] py-2 flex items-center justify-center gap-[5px] text-base cursor-pointer transition-all",
