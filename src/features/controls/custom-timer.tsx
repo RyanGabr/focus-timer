@@ -71,6 +71,7 @@ export function CustomTimer() {
             <Label className="text-white/50">Minutos</Label>
             <Input
               {...register("minutes")}
+              autoComplete="off"
               className="p-5 text-3xl"
               placeholder={String(minutes).padStart(2, "0")}
             />
@@ -82,6 +83,7 @@ export function CustomTimer() {
             <Label className="text-white/50">Segundos</Label>
             <Input
               {...register("seconds")}
+              autoComplete="off"
               className="p-5 text-3xl"
               placeholder={String(seconds).padStart(2, "0")}
             />
