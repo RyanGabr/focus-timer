@@ -1,8 +1,5 @@
 import { Button } from "@/components/button";
-import {
-  SECONDS_AMOUNT_INITIAL_STATE,
-  useTimer,
-} from "@/context/timer-context";
+import { useTimer } from "@/context/timer-context";
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { CustomTimer } from "./custom-timer";
@@ -13,19 +10,24 @@ export function Controls() {
 
   const [isTimerActive, setIsTimerActive] = useState(false);
 
-  const { secondsAmount, setSecondsAmount, pauseOffset, setPauseOffset } =
-    useTimer();
+  const {
+    secondsAmount,
+    setSecondsAmount,
+    pauseOffset,
+    setPauseOffset,
+    initialSeconds,
+  } = useTimer();
 
   useEffect(() => {
     if (isTimerActive) {
       startTimerRef.current =
-        Date.now() - (SECONDS_AMOUNT_INITIAL_STATE - pauseOffset) * 1000;
+        Date.now() - (initialSeconds - pauseOffset) * 1000;
 
       intervalRef.current = setInterval(() => {
         if (!startTimerRef.current) return;
 
         const elapsed = Math.floor((Date.now() - startTimerRef.current) / 1000);
-        const remaining = Math.max(SECONDS_AMOUNT_INITIAL_STATE - elapsed, 0);
+        const remaining = Math.max(initialSeconds - elapsed, 0);
 
         setSecondsAmount(remaining);
 
