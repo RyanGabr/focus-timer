@@ -21,8 +21,7 @@ import { handleSetCustomTimerSchema } from "@/schemas/custom-timer-schema";
 import { useState } from "react";
 
 export function CustomTimer() {
-  const { secondsAmount, setSecondsAmount, setInitialSeconds, setPauseOffset } =
-    useTimer();
+  const { secondsAmount, setSecondsAmount } = useTimer();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const minutes = Math.floor(secondsAmount / 60);
@@ -39,11 +38,8 @@ export function CustomTimer() {
 
   function handleSetCustomTimer(data: CustomTimerType) {
     const customTimer = data.minutes * 60 + data.seconds;
-
     setSecondsAmount(customTimer);
-    setInitialSeconds(customTimer);
-    setPauseOffset(customTimer);
-    
+
     setIsDialogOpen(false);
 
     reset();

@@ -13,12 +13,10 @@ const TIMER_PRESETS = {
 };
 
 export function Presets() {
-  const { setSecondsAmount, setInitialSeconds, setPauseOffset } = useTimer();
+  const { setSecondsAmount } = useTimer();
 
   function setTimerPreset(durationInSeconds: number) {
-    setInitialSeconds(durationInSeconds);
     setSecondsAmount(durationInSeconds);
-    setPauseOffset(durationInSeconds);
   }
 
   return (

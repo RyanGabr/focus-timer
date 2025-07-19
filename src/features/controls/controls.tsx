@@ -5,51 +5,39 @@ import { useEffect, useRef, useState } from "react";
 import { CustomTimer } from "./custom-timer";
 
 export function Controls() {
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const startTimerRef = useRef<number | null>(null);
-
-  const [isTimerActive, setIsTimerActive] = useState(false);
-
   const {
     secondsAmount,
     setSecondsAmount,
-    pauseOffset,
-    setPauseOffset,
-    initialSeconds,
   } = useTimer();
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimerRef = useRef<number | null>(null);
+  const initialTimeRef = useRef<number>(secondsAmount);
+
+  const [isTimerActive, setIsTimerActive] = useState(false);
 
   useEffect(() => {
     if (isTimerActive) {
-      startTimerRef.current =
-        Date.now() - (initialSeconds - pauseOffset) * 1000;
+      startTimerRef.current = Date.now();
+      initialTimeRef.current = secondsAmount;
 
       intervalRef.current = setInterval(() => {
-        if (!startTimerRef.current) return;
+        const now = Date.now();
+        const elapsedSeconds = Math.floor((now - startTimerRef.current!) / 1000);
+        const newRemaining = Math.max(initialTimeRef.current - elapsedSeconds, 0);
 
-        const elapsed = Math.floor((Date.now() - startTimerRef.current) / 1000);
-        const remaining = Math.max(initialSeconds - elapsed, 0);
+        setSecondsAmount(newRemaining);
 
-        setSecondsAmount(remaining);
-
-        if (remaining === 0) {
+        if (newRemaining === 0) {
           clearInterval(intervalRef.current!);
-          intervalRef.current = null;
           setIsTimerActive(false);
         }
-      }, 1000);
+      }, 500);
     } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-      setPauseOffset(secondsAmount);
+      clearInterval(intervalRef.current!);
     }
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
+    return () => clearInterval(intervalRef.current!);
   }, [isTimerActive]);
 
   function toggleTimer() {
