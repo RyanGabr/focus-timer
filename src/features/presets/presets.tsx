@@ -1,8 +1,9 @@
-import { Button } from "@/components/button";
-import SoftFlower from "@/assets/icons/soft-flower.png";
-import Drop from "@/assets/icons/drop.png";
 import Dots from "@/assets/icons/dots.png";
-import { useTimer } from "@/context/timer-context";
+import Drop from "@/assets/icons/drop.png";
+import SoftFlower from "@/assets/icons/soft-flower.png";
+import { Button } from "@/components/button";
+import { useAppDispatch } from "@/store/hooks";
+import { setPreset } from "../timer/timer-slice";
 
 const SECONDS_PER_MINUTE = 60; // 1 minute
 
@@ -13,38 +14,15 @@ const TIMER_PRESETS = {
 };
 
 export function Presets() {
-  const { setSecondsAmount } = useTimer();
+  const dispatch = useAppDispatch();
 
-  function setTimerPreset(durationInSeconds: number) {
-    setSecondsAmount(durationInSeconds);
+  function setTimerPreset(preset: number) {
+    dispatch(setPreset(preset));
   }
 
   return (
     <>
-      <div className="flex items-center justify-center gap-3 md:hidden">
-        <Button
-          onClick={() => setTimerPreset(TIMER_PRESETS.pomodoro)}
-          variant="secondary"
-          className="w-12 h-12"
-        >
-          <img src={SoftFlower} alt="" className="w-[20px]" />
-        </Button>
-        <Button
-          onClick={() => setTimerPreset(TIMER_PRESETS.shortBreak)}
-          variant="secondary"
-          className="w-12 h-12"
-        >
-          <img src={Drop} alt="" className="w-[14px]" />
-        </Button>
-        <Button
-          onClick={() => setTimerPreset(TIMER_PRESETS.longBreak)}
-          variant="secondary"
-          className="w-12 h-12"
-        >
-          <img src={Dots} alt="" className="w-[20px]" />
-        </Button>
-      </div>
-      <div className="items-center justify-center gap-3 hidden md:flex">
+      <div className="flex items-center justify-center gap-2">
         <Button
           onClick={() => setTimerPreset(TIMER_PRESETS.pomodoro)}
           variant="secondary"

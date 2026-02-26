@@ -1,23 +1,26 @@
 import { useEffect } from "react";
 import { Navbar } from "./components/navbar";
-import { useTimer } from "./context/timer-context";
 import { Controls } from "./features/controls/controls";
 import { Presets } from "./features/presets/presets";
 import { Timer } from "./features/timer/timer";
+import { useAppSelector } from "./store/hooks";
 
 export function App() {
-  const { secondsAmount } = useTimer();
+  const { activePresetSeconds, secondsElapsed } = useAppSelector(
+    (state) => state.timer,
+  );
 
   useEffect(() => {
-    const minutes = Math.floor(secondsAmount / 60);
-    const seconds = secondsAmount % 60;
+    const timerLeft = activePresetSeconds - secondsElapsed;
+    const minutes = Math.floor(timerLeft / 60);
+    const seconds = timerLeft % 60;
 
     document.title =
       minutes.toString().padStart(2, "0") +
       ":" +
       seconds.toString().padStart(2, "0") +
       " - Focus Timer";
-  }, [secondsAmount]);
+  }, [activePresetSeconds, secondsElapsed]);
 
   return (
     <div className="bg-zinc-950">

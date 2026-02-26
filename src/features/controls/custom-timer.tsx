@@ -1,7 +1,4 @@
 import { Button } from "@/components/button";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
-import { Sparkle } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -12,20 +9,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/dialog";
-import { useTimer } from "@/context/timer-context";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { CustomTimerType } from "@/types/custom-timer-type";
+import { Input } from "@/components/input";
+import { Label } from "@/components/label";
+import { Sparkle } from "lucide-react";
 import { handleSetCustomTimerSchema } from "@/schemas/custom-timer-schema";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import type { CustomTimerType } from "@/types/custom-timer-type";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { setPreset } from "../timer/timer-slice";
 
 export function CustomTimer() {
-  const { secondsAmount, setSecondsAmount } = useTimer();
+  const dispatch = useAppDispatch();
+  const { activePresetSeconds, secondsElapsed } = useAppSelector(
+    (state) => state.timer,
+  );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const minutes = Math.floor(secondsAmount / 60);
-  const seconds = secondsAmount % 60;
+  const timerLeft = activePresetSeconds - secondsElapsed;
+  const minutes = Math.floor(timerLeft / 60);
+  const seconds = timerLeft % 60;
 
   const {
     register,
@@ -38,10 +42,9 @@ export function CustomTimer() {
 
   function handleSetCustomTimer(data: CustomTimerType) {
     const customTimer = data.minutes * 60 + data.seconds;
-    setSecondsAmount(customTimer);
+    dispatch(setPreset(customTimer));
 
     setIsDialogOpen(false);
-
     reset();
   }
 
