@@ -28,10 +28,8 @@ export function Timer() {
   const secondsDisplay = String(seconds).padStart(2, "0");
 
   return (
-    <div className="flex items-center gap-2 text-8xl md:text-[10rem]">
-      <div>
-        {minutesDisplay}:{secondsDisplay}
-      </div>
+    <div className="tabular-nums text-8xl md:text-[10rem] tracking-[-0.7rem]">
+      {minutesDisplay}:{secondsDisplay}
     </div>
   );
 }
