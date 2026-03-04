@@ -28,7 +28,7 @@ export function Timer() {
   const secondsDisplay = String(seconds).padStart(2, "0");
 
   return (
-    <div className="tabular-nums text-8xl md:text-[10rem] tracking-[-0.7rem]">
+    <div className="tabular-nums text-[7rem] md:text-[10rem] tracking-tighter font-medium">
       {minutesDisplay}:{secondsDisplay}
     </div>
   );

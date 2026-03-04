@@ -11,11 +11,11 @@ import {
 } from "@/components/dialog";
 import { Input } from "@/components/input";
 import { Label } from "@/components/label";
-import { Sparkle } from "lucide-react";
 import { handleSetCustomTimerSchema } from "@/schemas/custom-timer-schema";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import type { CustomTimerType } from "@/types/custom-timer-type";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Cog, Sparkle } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { setPreset } from "../timer/timer-slice";
@@ -51,16 +51,13 @@ export function CustomTimer() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">
-          <Sparkle className="fill-zinc-50 text-transparent" size={16} />
-          Personalizado
+        <Button variant="secondary" className="py-3">
+          <Cog size={24} />
         </Button>
       </DialogTrigger>
       <DialogContent className="w-md">
         <DialogHeader className="items-center pt-10">
-          <DialogTitle className="text-2xl tracking-tight">
-            Tempo personalizado
-          </DialogTitle>
+          <DialogTitle className="text-2xl">Tempo personalizado</DialogTitle>
           <DialogDescription className="text-base">
             Defina o tempo que deseja no momento.
           </DialogDescription>

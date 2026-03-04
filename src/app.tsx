@@ -25,7 +25,7 @@ export function App() {
   return (
     <div className="bg-zinc-950">
       <Navbar />
-      <main className="flex flex-col items-center justify-center gap-10 h-screen">
+      <main className="flex flex-col items-center justify-center h-[100dvh]">
         <Presets />
         <Timer />
         <Controls />
